@@ -1,0 +1,24 @@
+/**
+ * Selects all link-type pseudo-selectors of the current selector.
+ * link, hover, active, focus, visited
+ */
+@mixin every-state {
+  &,
+  &:link,
+  &:hover,
+  &:active,
+  &:focus,
+  &:visited {
+    @content;
+  }
+}
+
+
+/**
+ * Selects all h's at once.
+ */
+@mixin every-heading() {
+  h1, h2, h3, h4, h5, h6 {
+    @content;
+  }
+}
