@@ -1,0 +1,32 @@
+// Maintains aspect ratio of element.
+// $horizontal and $vertical correspond to the ratio of the sides.
+// Note: this applies styles to the first child in the element.
+//
+// e.g. To maintain a 4:3 aspect ratio use...
+// @include maintain-aspect-ratio(4,3);
+//
+// e.g. To maintain a square ratio use...
+// @include maintain-aspect-ratio(1,1);
+
+@mixin maintain-aspect-ratio ($horizontal: 1, $vertical: 1, $content-selector: null) {
+  position: relative;
+
+  &::before {
+    display: block;
+    content: '';
+    width: 100%;
+    padding-top: ($vertical / $horizontal) * 100%;
+  }
+
+  @if $content-selector == null {
+    $content-selector: '*:first-child';
+  }
+
+  > #{$content-selector} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}

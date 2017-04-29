@@ -1,0 +1,23 @@
+$font-weights: (
+  thin: 100,
+  extra-light: 200,
+  light: 300,
+  normal: 400,
+  regular: 400,     // alias
+  roman: 400,       // alias
+  book: 400,         // alias
+  medium: 500,
+  semi-bold: 600,  // alias
+  demi-bold: 600,  // alias
+  bold: 700,
+  heavy: 800,
+  black: 900
+);
+
+/**
+ * Allows you to use the common name of a font weight rather than a number.
+ */
+@mixin font-weight ($weight: normal) {
+  // note: maps require sass v3.4.5
+  font-weight: map-get($font-weights, $weight);
+}

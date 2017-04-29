@@ -1,0 +1,63 @@
+/**
+ * Media Query based on minimum and maximum width.
+ * @type {String}
+ */
+$mediaTypeScreen: "only screen";
+@mixin breakpoint($min: 0 px, $max: 99999px, $mediaType: $mediaTypeScreen) {
+   @if $min{
+    @if $max {
+       @media #{$mediaType} and (max-width: #{$max} ) and (min-width: #{$min}){
+        @content;
+      }
+    }
+    @else {
+       @media #{$mediaType} and (min-width: #{$min}){
+        @content;
+      }
+    }
+  }
+  @else {
+     @if $max{
+      @media #{$mediaType} and (max-width: #{$max} ) {
+         @content;
+      }
+    }
+    @else {
+       @error"No size parameters provided to media query.";
+    }
+  }
+}
+
+/**
+ * Sets multiple values for a single property based on breakpoints for small, medium, and large.
+ * Large value is required and is the default which will be overriden by small and medium.
+ * Note: this mixin creates a media query around every property for every size you define which is a lot
+ * of code. Be careful not to overuse it.
+ *
+ * Typically you would want to wrap this mixin with some default sizes
+ * based on your project's needs:
+ *
+ * // Shortcut for responsive-property
+ * @mixin responsive ($prop, $l, $m: null, $s: null) {
+ *   @include responsive-property ( $property: $prop, $medium-max: 768px, $small-max: 560px, $large-value: $l, $medium-value: $m, $small-value: $s);
+ * }
+ *
+ * p {
+ *   @include responsive(font-size, 18px, $s: 16px); // font-size is 18px but switches to 16 when width <= 560
+ * }
+ */
+@mixin responsive-property($property, $large-value, $medium-max:null, $medium-value: null, $small-max:null, $small-value: null) {
+  #{$property}: $large-value;
+
+  @if ($medium-max != null && $medium-value != null) {
+     @include breakpoint(0, $medium-max){
+      #{$property}: $medium-value;
+    }
+  }
+
+  @if ($small-max != null && $small-value != null) {
+     @include breakpoint(0, $small-max){
+      #{$property}: $small-value;
+    }
+  }
+}

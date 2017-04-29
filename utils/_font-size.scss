@@ -1,0 +1,29 @@
+// sass-lint:disable zero-unit
+
+// Set the right font-size based on PSD's font size in pts.
+@mixin ps-font-size ($font-size-pts: 12) {
+  $font-size-px: $font-size-pts + 0px;
+  font-size: $font-size-px;
+}
+
+// Convert the PSD's leading to line-height
+@mixin ps-leading ($font-size-pts, $leading-pts) {
+  line-height: normal;
+  @if $leading-pts != auto {
+    $line-height-percentage: ($leading-pts / $font-size-pts) * 100%;
+    line-height: $line-height-percentage;
+  }
+}
+
+// Convert the PSD's tracking to letter-spacing
+@mixin ps-tracking ($tracking: 0) {
+  $ems: $tracking / 1000 + 0em;
+  letter-spacing: $ems;
+}
+
+// Sets the font size, leading, and tracking in one go.
+@mixin font-size($font-size-pts: 12, $leading-pts: auto, $tracking: 0) {
+  @include ps-font-size($font-size-pts);
+  @include ps-leading($font-size-pts, $leading-pts);
+  @include ps-tracking($tracking);
+}

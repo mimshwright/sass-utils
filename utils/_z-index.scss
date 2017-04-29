@@ -1,0 +1,45 @@
+// Store all the Z-Indexes that matter in your life.
+
+// Here's an example of a list of ids:
+// Add an id to the list. Items will be ordered based on the order in the list.
+// To reorder the z-indexes, just reorder the list
+//
+// $z-indexed-elements: (
+//   always-on-top-of-everything-button
+//   hamburger-nav
+//   important-button---but-not-that-important
+//   unnecessary-animation
+//   header
+//   shy-div
+//   background
+// );
+
+
+// Distance between each z-index
+$z-index-step: 100;
+// Lowest z-index
+$z-index-base: 100;
+
+/**
+ * Sets a z-index based on an id provided and a list of id's to look up.
+ * Note: It's recommended that you wrap this mixin in your project to provide a default
+ * elements list.
+ *
+ * E.g. @mixin z-index($id) { @include z-index-util($id, $my-element-list); }
+ */
+@mixin z-index-util($id, $z-indexed-elements) {
+  @if $z-indexed-elements == null {
+    @error "Invalid list of z-index element ids";
+  }
+  $throw: false;
+  $l: length($z-indexed-elements);
+  @if $id {
+    $index: index($z-indexed-elements, $id) - 1;
+    @if $index {
+      z-index: ($l - $index) * $z-index-step + $z-index-base;
+    } @else {$throw: true;}
+  } @else {$throw: true;}
+  @if $throw {
+    @error "$id must be defined and match an id in $z-indexed-elements.";
+  }
+}

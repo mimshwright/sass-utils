@@ -1,0 +1,12 @@
+/**
+ * Applies styles to all link-type states of a selector.
+ */
+@mixin every-state {
+  &,
+  &:link,
+  &:hover,
+  &:active,
+  &:visited {
+    @content;
+  }
+}
