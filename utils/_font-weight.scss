@@ -1,18 +1,23 @@
 $font-weights: (
   thin: 100,
+  hairline: 100,    // alias
   extra-light: 200,
+  ultra-light: 200,    // alias
   light: 300,
   normal: 400,
   regular: 400,     // alias
   roman: 400,       // alias
   book: 400,         // alias
   medium: 500,
-  semi-bold: 600,  // alias
+  semi-bold: 600,
   demi-bold: 600,  // alias
   bold: 700,
-  heavy: 800,
-  black: 900
+  extra-bold: 800,
+  ultra-bold: 800, // alias
+  heavy: 900,
+  black: 900        // alias
 );
+
 
 /**
  * Allows you to use the common name of a font weight rather than a number.
