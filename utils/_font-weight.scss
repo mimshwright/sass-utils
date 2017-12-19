@@ -1,28 +1,31 @@
 $font-weights: (
   thin: 100,
-  hairline: 100,    // alias
+  hairline: 100,
   extra-light: 200,
-  ultra-light: 200,    // alias
+  ultra-light: 200,
   light: 300,
   normal: 400,
-  regular: 400,     // alias
-  roman: 400,       // alias
-  book: 400,         // alias
+  regular: 400,
+  roman: 400,
+  book: 400,
   medium: 500,
   semi-bold: 600,
-  demi-bold: 600,  // alias
+  demi-bold: 600,
   bold: 700,
   extra-bold: 800,
-  ultra-bold: 800, // alias
+  ultra-bold: 800,
   heavy: 900,
-  black: 900        // alias
+  black: 900
 );
-
 
 /**
  * Allows you to use the common name of a font weight rather than a number.
  */
-@mixin font-weight ($weight: normal) {
+@function font-weight($weight: normal) {
   // note: maps require sass v3.4.5
-  font-weight: map-get($font-weights, $weight);
+  @return map-get($font-weights, $weight);
+}
+
+@mixin font-weight ($weight: normal) {
+  font-weight: font-weight($weight);
 }
